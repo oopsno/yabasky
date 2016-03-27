@@ -19,15 +19,21 @@ module.exports = (grunt) ->
           captureFile: 'coverage.html'
         src: ['test/*.coffee']
     coffee:
-      compile:
+      lib:
+        files:
+          'lib/yabasky.js': 'src/yabasky.coffee'
+      bin:
         options:
-          sourceMap: true
+          'no-header': yes
+          bare: yes
+        files:
+          'bin/yabasky':     'src/executable.coffee'
     codo:
       src: ['src']
 
   grunt.registerTask 'coverage', ['build', 'mochaTest:coverage']
   grunt.registerTask 'test',     ['build', 'mochaTest:test']
-  grunt.registerTask 'build',    'coffee:compile'
+  grunt.registerTask 'build',    'coffee'
   grunt.registerTask 'version', () ->
     content = fs.readFileSync './style/yabasky.yaml', encoding: 'utf-8'
     style = yaml.eval content
@@ -36,8 +42,9 @@ module.exports = (grunt) ->
     
   grunt.registerTask 'clean', () ->
     grunt.file.delete file, force: yes for file in [
-      'lib'
+      'bin'
       'doc'
+      'lib'
       'coverage.html'
     ]
     

@@ -6,6 +6,9 @@
   "scripts": {
     "test": "grunt test"
   },
+  "bin": {
+    "yabasky": "./bin/yabasky"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/oopsno/yabasky.git"
@@ -23,6 +26,12 @@
   },
   "homepage": "https://github.com/oopsno/yabasky#readme",
   "dependencies": {
+    "async": "^2.0.0-rc.2",
+    "colorful": "^2.1.0",
+    "fs-extra": "^0.26.7",
+    "minimist": "^1.2.0",
+    "request": "^2.69.0",
+    "underscore": "^1.8.3",
     "yaml": "^0.3.0"
   },
   "devDependencies": {
