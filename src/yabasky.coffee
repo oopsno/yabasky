@@ -2,38 +2,41 @@ require('colorful').toxic()
 
 pkg = require '../package.json'
 u = require 'underscore'
+fs = require 'fs-extra'
+path = require 'path'
+yatil = require './yatil'
 process = require 'process'
 minimist = require 'minimist'
 
+yabaskyRoot = path.resolve __dirname, '..'
+
 ###
-Version & Usage
+  Constants
 ###
 
-spaces = (count) ->
-  padding = ''
-  if not u.isNumber count
-    return ''
-  while count > 0
-    padding += ' '
-    count--
-  return padding
-  
+defualts =
+  config: 'thesis.yaml'
+  skeleton: 'skeleton.tex'
+
+###
+  Version & Usage
+###
 maxKeyLength = (obj) ->
   if not obj
     return 0
   keyLengths = u.mapObject obj, (val, key) -> key.length
   if u.isEmpty keyLengths
     return 0
-  else 
+  else
     return u.max keyLengths
 
 printCommandOptions = (maxLen, name, desc) ->
-  console.log "#{spaces maxLen - name.length + 2}--#{name} => #{desc}"
+  console.log "#{yatil.spaces maxLen - name.length + 2}--#{name} => #{desc}"
 
 printCommandUsage = (maxLen, name, detail) ->
   if not detail.description then return
   pad = maxLen - name.length
-  console.log "#{spaces pad}#{name} [#{detail.alias}] -- #{detail.description}"
+  console.log "#{yatil.spaces pad}#{name} [#{detail.alias}] -- #{detail.description}"
   if detail.options
     printCommandOptions maxLen, name, desc for name, desc of detail.options;
 
@@ -43,32 +46,45 @@ fnUsage = ->
     if key.length > maxOptLen then key.length else maxOptLen
   console.log "#{pkg.name} #{pkg.version}\n\nUsage:\n"
   printCommandUsage maxLen, cmd, detail for cmd, detail of commands
-  
+
 ###
   Init
 ###
-  
+
 fnInit = (opts) ->
-  console.error 'No Impl Yet'.bold.red
-  
+  cwd = path.resolve process.cwd()
+  templateDir = path.join yabaskyRoot, 'template'
+  console.log "Initializing #{cwd}"
+  try
+    fs.readdirSync(templateDir, encoding: 'utf-8').forEach (file) ->
+      console.log "Copying #{file}..."
+      target = path.join cwd, file
+      if yatil.exists target, fs.F_OK | fs.W_OK
+        console.warn "#{file} exists. Terminating...".yellow
+        process.exit 255
+      fs.copySync(path.join(templateDir, file), path.join(cwd,file))
+  catch err
+    console.error "Error occurred".red.bold
+    console.error err
+
 ###
   Clean
 ###
-  
+
 fnClean = ->
   console.log "Cleaning $PWD (#{process.cwd()})...".green
   console.error 'No Impl Yet'.bold.red
-  
+
 ###
   Build
 ###
-  
+
 fnBuild = (opts) ->
   console.log 'Building current thesis...'.green
   if opts.shtf
     console.log 'Building in SHTF mode'.blink.bold.yellow
   console.error 'No Impl Yet'.bold.red
-  
+
 ###
   Command list
 ###
@@ -95,8 +111,9 @@ commands =
 
 u.mapObject commands, (detail) ->
   if detail.alias
-    commands[detail.alias] = fn: detail.fn
-    
+    commands[detail.alias] =
+      fn: detail.fn
+
 ###
   Command-line arguments processing
 ###
@@ -104,15 +121,15 @@ u.mapObject commands, (detail) ->
 parseArguments = ->
   minimist process.argv[2..], boolean: yes
 
-  
+
 ###
   entry
 ###
-  
+
 main = ->
   argv = parseArguments()
   cmd = argv._[0]
   fn = (commands[cmd] || commands.usage).fn
   fn argv
-  
+
 exports.main = main
