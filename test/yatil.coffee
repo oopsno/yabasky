@@ -5,7 +5,6 @@ require('chai').should()
 
 fs = require 'fs-extra'
 os = require 'os'
-async = require 'async'
 crypto = require 'crypto'
 path = require 'path'
 yatil = require '../lib/yatil'
