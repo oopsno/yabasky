@@ -22,6 +22,7 @@ module.exports = (grunt) ->
       lib:
         files:
           'lib/yabasky.js': 'src/yabasky.coffee'
+          'lib/config.js': 'src/config.coffee'
           'lib/yatil.js': 'src/yatil.coffee'
       entry:
         options:
