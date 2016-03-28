@@ -22,6 +22,7 @@ module.exports = (grunt) ->
       lib:
         files:
           'lib/yabasky.js': 'src/yabasky.coffee'
+          'lib/yatil.js': 'src/yatil.coffee'
       bin:
         options:
           'no-header': yes

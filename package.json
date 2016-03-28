@@ -35,6 +35,8 @@
     "yaml": "^0.3.0"
   },
   "devDependencies": {
+    "blanket": "^1.2.3",
+    "chai": "^3.5.0",
     "codo": "^2.1.0",
     "coffee-script": "^1.10.0",
     "grunt": "^0.4.5",
