@@ -30,40 +30,21 @@ describe "yabasky.yatil", () ->
 
   describe "exists", () ->
     tmp = os.tmpdir()
-    genRandomPath = (callback) ->
-      async.map (16 for i in [1..16]), crypto.randomBytes, (err, rbs) ->
-        if err
-          callback err, null
-        paths = rbs.map (bytes) -> path.join(tmp, bytes.toString('hex'))
-        callback null, paths
-    writeFiles = (paths, callback) ->
-      try
-        for p in paths
-          fs.writeFileSync p, p
-        callback null, paths
-      catch err
-        callback err, null
-    cleanup = (paths, callback) ->
-      async.map paths, fs.removeSync, (err) ->
-        if err then callback err, null
-        else callback null, paths
-          
-    it "should return yes on existing paths", (done) ->
-      doTests = (paths, callback) ->
-        try
-          for p in paths
-            yatil.exists(p).should.equal yes, "#{p} exists"
-          callback null, null
-        catch err
-          callback err, err
-      async.waterfall [genRandomPath, writeFiles, doTests, cleanup], done
-      
-    it "should return no on not existing paths", (done) ->
-      doTests = (paths, callback) ->
-        try
-          for p in paths
-            yatil.exists(p).should.equal no, "#{p} not exists"
-          callback null, null
-        catch err
-          callback err, err
-      async.waterfall [genRandomPath, doTests], done
+    genRandomPath = (len) ->
+      path.join tmp, crypto.randomBytes(len).toString('hex')
+    writeFiles = (paths) -> fs.writeFileSync p, p for p in paths
+    removeFiles = (paths) -> fs.removeSync for p in paths
+
+    it "should return 'yes' on existing paths", () ->
+      doTest = (p) -> yatil.exists(p).should.equal yes, "#{p} exists"
+
+      randomPaths = (genRandomPath 16 for i in [1..16])
+      writeFiles randomPaths
+      doTest for p in randomPaths
+      removeFiles randomPaths
+
+    it "should return 'no' on not existing paths", () ->
+      doTest = (p) -> yatil.exists(p).should.equal no, "#{p} not exists"
+        
+      randomPaths = (genRandomPath 16 for i in [1..16])
+      doTest for p in  randomPaths
