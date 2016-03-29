@@ -2,7 +2,8 @@
 
 % LaTeX3
 \RequirePackage{expl3}
-\ProvidesExplPackage{cover}{2016/3/29}{0.0.1}{YaBAskY::Utility::Cover}
+\RequirePackage{graphicx}
+\ProvidesExplPackage{cover}{2016/3/29}{0.0.2}{YaBAskY::Utility::Cover}
 
 % 全局结构
 \seq_new:c  { g_seq_cover_items }
@@ -21,6 +22,7 @@
 % 配置接口
 \cs_new:Npn \cover_item_set_name:nn #1#2
   {
+    \str_const:cn { c_cover_item_name_#1 }  { #2 }
     \prop_put:cnn { g_prop_cover_item_name } { #1 } { #2 }
   }
 
@@ -42,7 +44,82 @@
        }
   }
 
+% 程控接口
+\cs_new:Npn \l__cover_item_name:n #1
+{
+  \group_begin:
+  \prop_get:cnN { g_prop_cover_item_name } { #1 } { \lv }
+  \lv
+  \group_end:
+}
+
+\cs_new:Npn \l__cover_item_value:n #1
+{
+  \group_begin:
+  \prop_get:cnN { g_prop_cover_item_value } { #1 } { \lv }
+  \lv
+  \group_end:
+}
+
 \seq_map_function:cN { g_seq_cover_items } { \cover_item_new:n }
+
+% 私有函数 创建一个blank
+\cs_new:Npn \l__cover_blank:nn #1#2
+  {
+    \underline { \makebox [ #2 ] [ c ] { #1 } }
+  }
+
+% 支持自动折行的"题目"
+\cs_new:Npn \l__cover_title_item:
+  {
+    \group_begin:
+    \prop_get:cnN { g_prop_cover_item_name  } { title } { \l_name  }
+    \prop_get:cnN { g_prop_cover_item_value } { title } { \l_value }
+    \vskip\stretch{2}
+    \bfseries\songti\zihao{3}
+    \l_name  \quad
+    \heiti\zihao{3} \l__cover_blank:nn { \str_range:Nnn { \l_value } { 1   } { 14 } } { 250pt }
+    \vskip -2em
+    \hspace{5em}    \l__cover_blank:nn { \str_range:Nnn { \l_value } { 15  } { -1 } } { 250pt }
+    \group_end:
+  }
+
+\cs_new:Npn \l__cover_major_item:n #1
+  {
+     \vskip\stretch{0.5}
+     \bfseries\songti\zihao{3}   \l__cover_item_name:n { #1 } \quad
+     \songti\zihao{-3} \l__cover_blank:nn  { \l__cover_item_value:n { #1 } } { 250pt }
+  }
+
+\cs_new:Npn \l_covver_corner_item:n #1
+  {
+     \bfseries\songti\zihao{-4}
+     \l__cover_item_name:n { #1 } ~ \l__cover_blank:nn { \l__cover_item_value:n { #1 } } { 100pt }
+  }
+
+% 构造封面
+\cs_new:Nn \cover_make:
+  {
+    \cleardoublepage
+    \thispagestyle{empty}
+    \begin{flushright}
+      \l_covver_corner_item:n { class } \\
+      \l_covver_corner_item:n { id }
+    \end{flushright}
+    \begin{center}
+      \vskip \stretch{2}
+        \includegraphics[width=9cm]{xdu_logo_text}
+      \vskip \stretch{1}
+        \heiti\zihao{0}\ziju{0.25} \l__cover_item_name:n { type } \ziju{0}
+      \vskip \stretch{2}
+        \includegraphics[width=5cm]{xdu_logo_graph}
+      \l__cover_title_item:
+      \l__cover_major_item:n { college }
+      \l__cover_major_item:n { major }
+      \l__cover_major_item:n { author }
+      \l__cover_major_item:n { advisor }
+    \end{center}
+  }
 
 % 调试接口
 \cs_new:Nn \cover_debuginfo:
@@ -50,10 +127,9 @@
     \group_begin:
     \section { 封面信息 }
     \begin { itemize }
-    \prop_map_inline:cn { g_prop_cover_item_name }
+    \seq_map_inline:cn { g_seq_cover_items }
       {
-        \prop_get:cnN { g_prop_cover_item_value } { ##1 } { \lv }
-        \item { ##2 {\quad} - {\quad} {\lv} }
+        \item { \l__cover_item_name:n { ##1 } {\quad} - {\quad} \l__cover_item_value:n { ##1 } }
       }
     \end{ itemize }
     \group_end:
