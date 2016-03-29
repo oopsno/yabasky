@@ -5,7 +5,7 @@
 ## TODO
 
 - [ ] :beer:CLI
-- [ ] 样式定制
+- [ ] :beer:样式定制
 - [ ] Kramdown集成
 - [ ] Pandoc集成
 - [ ] PhantomJS集成
