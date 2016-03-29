@@ -78,7 +78,7 @@
     \begin{itemize}
     \prop_map_inline:cn { g_prop_switch_#1_name }
       {
-        \item { ##2~-~\switch_chs:nn { #1 } { ##1 } }
+        \item { ##2{\quad}-{\quad}\switch_chs:nn { #1 } { ##1 } }
       }
     \end{itemize}
   }
@@ -86,10 +86,9 @@
 % 打印所有开关组
 \cs_new:Nn \switch_debuginfo:
   {
-    \section { 开关选项组 }
     \prop_map_inline:Nn { \g_prop_switch_groups }
       {
-        \subsection { ##2 }
+        \section { ##2 }
         \switch_debuginfo:n { ##1 }
       }
   }
