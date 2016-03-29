@@ -3,6 +3,8 @@
 % LaTeX3
 \RequirePackage{expl3}
 \RequirePackage{switch}
+\RequirePackage{cover}
+\input{yabasky.cfg}
 \ProvidesExplClass{yabasky}{2016/3/26}{0.0.1}{YaBAskY Document Class}
 
 % CTeX v2.3
@@ -17,6 +19,9 @@
 \NewDocumentCommand \SetCompileOptions { m }
   { \switch_group_set:nn { compile } { #1 } }
 
+\NewDocumentCommand \SetCoverItems { m }
+  { \cover_set:n { #1 } }
+
 % 打印调试信息
 \NewDocumentCommand \MakeDebugPage { }
   {
@@ -25,6 +30,7 @@
         \msg_term:n { 正在以调试模式编译 }
         \chapter { 调试信息 }
         \switch_debuginfo:
+        \cover_debuginfo:
       }
       {
         \msg_term:n { 正在以发布模式编译 }
