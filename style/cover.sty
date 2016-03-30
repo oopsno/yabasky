@@ -75,12 +75,17 @@
     \group_begin:
     \prop_get:cnN { g_prop_cover_item_name  } { title } { \l_name  }
     \prop_get:cnN { g_prop_cover_item_value } { title } { \l_value }
+    \int_compare:nNnTF { \str_count:N  { \l_value } } { > } { 28 }
+      {
+        \msg_interrupt:nnn { 标题过长 } { 标题``\l_value''超过28字限制 } { 按H也救不了你 哼╭(╯^╰)╮ }
+      }
+      { }
     \vskip\stretch{2}
     \bfseries\songti\zihao{3}
     \l_name  \quad
     \heiti\zihao{3} \l__cover_blank:nn { \str_range:Nnn { \l_value } { 1   } { 14 } } { 250pt }
     \vskip -2em
-    \hspace{5em}    \l__cover_blank:nn { \str_range:Nnn { \l_value } { 15  } { -1 } } { 250pt }
+    \hspace{5em}    \l__cover_blank:nn { \str_range:Nnn { \l_value } { 15  } { 28 } } { 250pt }
     \group_end:
   }
 
