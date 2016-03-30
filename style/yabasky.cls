@@ -10,19 +10,16 @@
 % CTeX v2.3
 \LoadClass[a4paper,zihao=-4,fontset=adobe]{ctexbook}[2016/02/02]
 
+% 纸张设置
+\RequirePackage[
+  top=3cm,
+  bottom=2cm,
+  left=3cm,
+  right=2cm
+]{geometry}
+
 % 图形文件搜索路径
 \graphicspath{{figures/}}
-
-% 纸张设置
-\oddsidemargin 1.46 true cm
-\evensidemargin -0.54 true cm
-\topmargin -0.54 true cm
-\headheight 12.9pt
-\headsep 17.3527pt
-\textheight 24.7 true cm
-\textwidth 15 true cm
-\footskip 0 cm
-\parskip 0.5ex plus 0.25ex minus 0.25ex
 
 % 定义开关
 \switch_group_new:nn { compile }           { 编译选项 }
