@@ -81,25 +81,34 @@
       }
       { }
     \vskip\stretch{2}
-    \bfseries\songti\zihao{3}
-    \l_name  \quad
-    \heiti\zihao{3} \l__cover_blank:nn { \str_range:Nnn { \l_value } { 1   } { 14 } } { 250pt }
-    \vskip -2em
-    \hspace{5em}    \l__cover_blank:nn { \str_range:Nnn { \l_value } { 15  } { 28 } } { 250pt }
+    {
+      \bfseries\songti\zihao{3}
+      \l_name \hspace{1em}
+    }
+    {
+      \bfseries\heiti\zihao{3}
+      \l__cover_blank:nn { \str_range:Nnn { \l_value } { 1 } { 14 } } { 240pt }
+      \vskip -2em
+      \hspace{5em} \l__cover_blank:nn { \str_range:Nnn { \l_value } { 15 } { 28 } } { 240pt }
+    }
     \group_end:
   }
 
 \cs_new:Npn \l__cover_major_item:n #1
   {
-     \vskip\stretch{0.5}
-     \bfseries\songti\zihao{3}   \l__cover_item_name:n { #1 } \quad
-     \songti\zihao{-3} \l__cover_blank:nn  { \l__cover_item_value:n { #1 } } { 250pt }
+     \vskip -0.5em
+     { \bfseries\songti\zihao{3} \l__cover_item_name:n { #1 } }
+     { \songti\zihao{-3} \hspace{1em} \l__cover_blank:nn  { \l__cover_item_value:n { #1 } } { 240pt } }
   }
 
-\cs_new:Npn \l_covver_corner_item:n #1
+\cs_new:Npn \l_cover_corner_item:n #1
   {
-     \bfseries\songti\zihao{-4}
-     \l__cover_item_name:n { #1 } ~ \l__cover_blank:nn { \l__cover_item_value:n { #1 } } { 100pt }
+    {
+      \bfseries\songti\zihao{-4}
+      \l__cover_item_name:n { #1 }
+      \hspace{1em}
+      \l__cover_blank:nn { \l__cover_item_value:n { #1 } } { 55pt }
+    }
   }
 
 % 构造封面
@@ -108,16 +117,16 @@
     \cleardoublepage
     \thispagestyle{empty}
     \begin{flushright}
-      \l_covver_corner_item:n { class } \\
-      \l_covver_corner_item:n { id }
+      \l_cover_corner_item:n { class } \\
+      \l_cover_corner_item:n { id }
     \end{flushright}
     \begin{center}
       \vskip \stretch{2}
-        \includegraphics[width=9cm]{xdu_logo_text}
+        \includegraphics[width=7.2cm]{xdu_logo_text}
       \vskip \stretch{1}
         \heiti\zihao{0}\ziju{0.25} \l__cover_item_name:n { type } \ziju{0}
       \vskip \stretch{2}
-        \includegraphics[width=5cm]{xdu_logo_graph}
+        \includegraphics[width=4cm]{xdu_logo_graph}
       \l__cover_title_item:
       \l__cover_major_item:n { college }
       \l__cover_major_item:n { major }
