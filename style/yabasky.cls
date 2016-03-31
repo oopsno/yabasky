@@ -13,10 +13,41 @@
 % 纸张设置
 \RequirePackage[
   top=3cm,
+  headheight=1cm,
   bottom=2cm,
   left=3cm,
   right=2cm
 ]{geometry}
+
+% 章节格式
+\ctexset
+  {
+    chapter =
+     {
+       format = \centering\heiti\zihao{3},
+       pagestyle = fancy,
+     },
+    section =
+     {
+       number = \thesection,
+       format = \centering\songti\zihao{4},
+     }
+  }
+
+% 5. 页眉: 宋体五号 居中排列
+\RequirePackage{fancyhdr}
+\fancyhead{}
+% 左(偶数)页面为论文题目
+\fancyhead [ CE ] { \textnormal { \songti\zihao{5}\thesis_info:n { title } } }
+% 右(奇数)页面为章次和章的标题
+\fancyhead [ CO ] { \textnormal { \songti\zihao{5}\leftmark } }
+% 页眉底划线的宽度为0.75磅
+\renewcommand{\headrulewidth}{0.75pt}
+% 清除CTeX的页脚设置
+\fancyfoot{}
+
+% 6. 页码: 宋体小五号 排在页眉最外侧 不加任何修饰
+\fancyhead [ LE, RO ] { \songti\zihao{-5}\thepage }
 
 % 图形文件搜索路径
 \graphicspath{{figures/}}

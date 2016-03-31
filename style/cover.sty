@@ -63,6 +63,12 @@
 
 \seq_map_function:cN { g_seq_cover_items } { \cover_item_new:n }
 
+% 导出标题
+\cs_new:Npn \thesis_info:n #1
+  {
+    \l__cover_item_value:n { #1 }
+  }
+
 % 私有函数 创建一个blank
 \cs_new:Npn \l__cover_blank:nn #1#2
   {
