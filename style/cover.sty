@@ -120,7 +120,7 @@
 % 构造封面
 \cs_new:Nn \cover_make:
   {
-    \cleardoublepage
+    \clearpage
     \thispagestyle{empty}
     \begin{flushright}
       \l_cover_corner_item:n { class } \\
@@ -139,6 +139,8 @@
       \l__cover_major_item:n { author }
       \l__cover_major_item:n { advisor }
     \end{center}
+    \clearpage
+    \thispagestyle{empty}
   }
 
 % 调试接口
