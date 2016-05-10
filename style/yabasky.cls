@@ -4,6 +4,7 @@
 \RequirePackage{expl3}
 \RequirePackage{switch}
 \RequirePackage{cover}
+\RequirePackage{autoterm}
 \input{yabasky.cfg}
 \ProvidesExplClass{yabasky}{2016/3/29}{0.0.2}{YaBAskY Document Class}
 
