@@ -68,6 +68,12 @@
 \RenewDocumentCommand \maketitle { }
   { \cover_make: }
 
+% 术语定义
+\NewDocumentCommand \SetTerm { mmm }
+  {
+    \new_term:nnn { #1 } { #2 } { #3 }
+  }
+
 % 打印调试信息
 \NewDocumentCommand \MakeDebugPage { }
   {
