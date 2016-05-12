@@ -92,7 +92,7 @@
         \msg_interrupt:nnn { 标题过长 } { 标题``\l_value''超过28字限制 } { 按H也救不了你 哼╭(╯^╰)╮ }
       }
       { }
-    \vskip\stretch{2}
+    \vskip 1cm
     {
       \bfseries\songti\zihao{3}
       \l_name \hspace{1em}
@@ -100,7 +100,7 @@
     {
       \bfseries\heiti\zihao{3}
       \l__cover_blank:nn { \str_range:Nnn { \l_value } { 1 } { 14 } } { 240pt }
-      \vskip -2em
+      \vskip -1em
       \hspace{5em} \l__cover_blank:nn { \str_range:Nnn { \l_value } { 15 } { 28 } } { 240pt }
     }
     \group_end:
@@ -122,8 +122,7 @@
 \cs_new:Npn \l__cover_corner_item:n #1
   {
     {
-      \bfseries\songti\zihao{-4}
-      \l__cover_item_name:n { #1 }
+      \bfseries\songti\zihao{-4}\ziju{0.5} \l__cover_item_name:n { #1 }
       \hspace{1em}
       \l__cover_blank:nn { \l__cover_item_value:n { #1 } } { 55pt }
     }
@@ -133,22 +132,22 @@
 \cs_new:Nn \cover_make:
   {
     \clearpage
+    \newgeometry{left=3cm,right=3cm,top=2.54cm,bottom=2.54cm}
     \thispagestyle{empty}
     \begin{flushright}
       \l__cover_corner_item:n { class } \\
       \l__cover_corner_item:n { id    }
     \end{flushright}
     \begin{center}
-      \vskip \stretch{2}
-        \includegraphics[width=7.2cm]{xdu_logo_text}
-      \vskip \stretch{1}
-        \heiti\zihao{0}\ziju{0.25} \l__cover_item_name:n { type } \ziju{0}
-      \vskip \stretch{2}
+      \vskip 0.5cm
+        \includegraphics[width=7.5cm]{xdu_logo_text}
+      \vskip 0cm
+        \heiti\zihao{0}\ziju{0.125} \l__cover_item_name:n { type } \ziju{0}
+      \vskip 1.5cm
         \includegraphics[width=4cm]{xdu_logo_graph}
       \seq_map_function:cN { g_seq_cover_core_items } { \l__cover_core_item:n }
     \end{center}
-    \clearpage
-    \thispagestyle{empty}
+    \restoregeometry
   }
 
 % 调试接口
