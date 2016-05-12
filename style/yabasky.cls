@@ -27,6 +27,7 @@
      {
        format = \centering\heiti\zihao{3},
        pagestyle = fancy,
+       afterskip = 1em
      },
     section =
      {
