@@ -9,31 +9,42 @@
 \ProvidesExplClass{yabasky}{2016/05/20}{0.0.3}{YaBAskY Document Class}
 
 % CTeX v2.3
-\LoadClass[a4paper,zihao=-4,fontset=adobe]{ctexbook}[2016/02/02]
+\LoadClass[a4paper,zihao=-4,fontset=adobe,hyperref]{ctexbook}[2016/02/02]
 
 % 纸张设置
 \RequirePackage[
-  top=3cm,
-  headsep=1cm,  % 页眉 2cm 即页眉距上边界 1cm
-  bottom=2cm,
-  inner=4cm,    % 内页边距 3cm + 装订线 1cm
-  outer=2cm
+  top        = 3cm,
+  headheight = 2cm,
+  headsep    = 1cm,  % 页眉 2cm 即页眉距上边界 1cm
+  bottom     = 2cm,
+  inner      = 4cm,  % 内页边距 3cm + 装订线 1cm
+  outer      = 2cm
 ]{geometry}
 
 % 章节格式
 \ctexset
   {
     chapter =
-     {
-       format = \centering\heiti\zihao{3},
-       pagestyle = fancy,
-       afterskip = 1em
-     },
+      {
+        format = \centering\heiti\zihao{3},
+        pagestyle = fancy,
+        afterskip = 1em
+      },
     section =
-     {
-       number = \thesection,
-       format = \centering\songti\zihao{4},
-     }
+      {
+        number = \thesection,
+        format = \centering\songti\zihao{4}
+      },
+    subsection =
+      {
+        number = \thesection,
+        format = \centering\songti\zihao{4}
+      },
+    subsubsection =
+      {
+        number = \thesection,
+        format = \centering\songti\zihao{4}
+      }
   }
 
 % 5. 页眉: 宋体五号 居中排列
