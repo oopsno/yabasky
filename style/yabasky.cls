@@ -9,7 +9,13 @@
 \ProvidesExplClass{yabasky}{2016/05/20}{0.0.3}{YaBAskY Document Class}
 
 % CTeX v2.3
-\LoadClass[a4paper,zihao=-4,fontset=adobe,hyperref]{ctexbook}[2016/02/02]
+\LoadClass[
+  a4paper,
+  hyperref,
+  zihao      = -4,    % 默认小四号字体
+  linespread = 1.5,   % 近似1.5倍行距
+  fontset    = adobe  % 默认Adobe字体集
+]{ctexbook}[2016/02/02]
 
 % 纸张设置
 \RequirePackage[
