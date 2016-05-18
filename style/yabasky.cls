@@ -6,7 +6,7 @@
 \RequirePackage{cover}
 \RequirePackage{autoterm}
 \input{yabasky.cfg}
-\ProvidesExplClass{yabasky}{2016/3/29}{0.0.2}{YaBAskY Document Class}
+\ProvidesExplClass{yabasky}{2016/05/20}{0.0.3}{YaBAskY Document Class}
 
 % CTeX v2.3
 \LoadClass[a4paper,zihao=-4,fontset=adobe]{ctexbook}[2016/02/02]
@@ -14,10 +14,10 @@
 % 纸张设置
 \RequirePackage[
   top=3cm,
-  headheight=1cm,
+  headsep=1cm,  % 页眉 2cm 即页眉距上边界 1cm
   bottom=2cm,
-  left=3cm,
-  right=2cm
+  inner=4cm,    % 内页边距 3cm + 装订线 1cm
+  outer=2cm
 ]{geometry}
 
 % 章节格式
