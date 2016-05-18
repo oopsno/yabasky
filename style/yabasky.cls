@@ -32,24 +32,30 @@
   {
     chapter =
       {
+        beforeskip = 1.2em,
+        afterskip  = 1.2em,
         format = \centering\heiti\zihao{3},
-        pagestyle = fancy,
-        afterskip = 1em
       },
     section =
       {
+        beforeskip = 1em,
+        afterskip  = 1em,
         number = \thesection,
         format = \centering\songti\zihao{4}
       },
     subsection =
       {
-        number = \thesection,
-        format = \centering\songti\zihao{4}
+        beforeskip = 1em,
+        afterskip  = 1em,
+        number = \thesubsection,
+        format = \songti\zihao{4}
       },
     subsubsection =
       {
-        number = \thesection,
-        format = \centering\songti\zihao{4}
+        beforeskip = 1em,
+        afterskip  = 1em,
+        number = \thesubsubsection,
+        format = \songti\zihao{4}
       }
   }
 
