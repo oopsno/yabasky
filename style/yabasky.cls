@@ -7,7 +7,7 @@
 \RequirePackage{autoterm}
 \RequirePackage{fancyhdr}
 \input{yabasky.cfg}
-\ProvidesExplClass{yabasky}{2016/05/20}{0.0.3}{YaBAskY Document Class}
+\ProvidesExplClass{yabasky}{2016/05/20}{0.0.4}{YaBAskY Document Class}
 
 % CTeX v2.3
 \LoadClass[
@@ -27,6 +27,12 @@
   inner      = 4cm,  % 内页边距 3cm + 装订线 1cm
   outer      = 2cm
 ]{geometry}
+
+% 图注设置
+\RequirePackage[
+  font     = small, % CTeX的主字体为小四号时 small 即五号
+  labelsep = space
+]{caption}
 
 % 章节格式
 \ctexset
