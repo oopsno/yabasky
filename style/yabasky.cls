@@ -33,7 +33,7 @@
   {
     chapter =
       {
-        pagestyle  = mainmatter,
+        pagestyle  = YaBAskY::PageStyle,
         beforeskip = 1.2em,
         afterskip  = 1.2em,
         format = \centering\heiti\zihao{3}\bf,
@@ -64,30 +64,20 @@
 % 西文字体默认使用Times
 \fontfamily { ptm }
 
-\cs_new:Npn \l__defalut_head: {
+\fancypagestyle { YaBAskY::PageStyle } {
   \fancyhead { }
   \fancyfoot { }
   % 左(偶数)页面为论文题目
   \fancyhead [ CE ] { \textnormal { \songti\zihao{5}\thesis_info:n { title } } }
   % 页眉底划线的宽度为0.75磅
   \renewcommand{\headrulewidth}{0.75pt}
-}
-
-\fancypagestyle { mainmatter } {
-  \l__defalut_head:
   % 右(奇数)页面为章次和章的标题
   \fancyhead [ CO ] { \textnormal { \songti\zihao{5}\leftmark } }
   % 页码宋体小五号 排在页眉最外侧 不加任何修饰
   \fancyhead [ LE, RO ] { \songti\zihao{-5}\thepage }
 }
 
-\fancypagestyle { frontmatter } {
-  % 右(奇数)页面为章次和章的标题
-  \fancyhead [ CO ] { \textnormal { \songti\zihao{5}\leftmark } }
-  \l__defalut_head:
-  % 页码宋体小五号 排在页眉最外侧 不加任何修饰
-  \fancyhead [ LE, RO ] { \songti\zihao{-5}\roman{page} }
-}
+\pagestyle { YaBAskY::PageStyle }
 
 % 图形文件搜索路径
 \graphicspath{{figures/}}
