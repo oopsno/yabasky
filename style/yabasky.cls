@@ -7,7 +7,7 @@
 \RequirePackage{autoterm}
 \RequirePackage{fancyhdr}
 \input{yabasky.cfg}
-\ProvidesExplClass{yabasky}{2016/05/20}{0.0.4}{YaBAskY Document Class}
+\ProvidesExplClass{yabasky}{2016/05/21}{0.1.0}{YaBAskY Document Class}
 
 % CTeX v2.3
 \LoadClass[
@@ -84,9 +84,6 @@
 }
 
 \pagestyle { YaBAskY::PageStyle }
-
-% 图形文件搜索路径
-\graphicspath{{figures/}}
 
 % 定义开关
 \switch_group_new:nn { compile }           { 编译选项 }
