@@ -1,0 +1,3 @@
+[submodule "styles/XDUThesis"]
+	path = styles/XDUThesis
+	url = https://github.com/oopsno/XDUThesis.git
